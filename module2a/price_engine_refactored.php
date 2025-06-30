@@ -17,9 +17,9 @@
         <h1>Order Summary</h1>
         <?php
             // --- Configuration: Change these values to test all business rules! ---
-            $size = 'M'; // Options: 'S', 'M', 'L', 'XL'
-            $color = 'Purple'; // Any string, but test with 'Sunset Orange' or 'Ocean Blue'
-            $isCustomized = false; // Options: true, false
+            $size = 'XL'; // Options: 'S', 'M', 'L', 'XL'
+            $color = 'Sunset Orange'; // Any string, but test with 'Sunset Orange' or 'Ocean Blue'
+            $isCustomized = true; // Options: true, false
             $customerFirstName = 'Sarah'; // <-- IMPORTANT: REPLACE WITH YOUR ACTUAL FIRST NAME
 
             // --- Part A: Implement the logic below using ONLY simple, nested if-statements ---
