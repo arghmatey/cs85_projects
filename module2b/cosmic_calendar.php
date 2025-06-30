@@ -21,8 +21,16 @@
         <div class="calendar-grid">
             <?php
                 $firstName = "Sarah";
-                $jsonString = file_get_contents('https://timeapi.io/api/time/current/zone?timeZone=America%2Los_Angeles');
+
+                $jsonString = file_get_contents('https://timeapi.io/api/time/current/zone?timeZone=America%2FLos_Angeles');
                 $data = json_decode($jsonString);
+
+                $nameLength = strlen($firstName);
+
+                $dateTimeString = $data->dateTime;
+                $date = new DateTime($dateTimeString);
+                $dayOfYear = (int)$date->format('z') + 1;
+                $month = $data->month;
             ?>
         </div>
     </div>
