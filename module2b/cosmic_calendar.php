@@ -43,8 +43,14 @@
                         $cssClass .= " cosmic-month";
                     }
                 }
-                
+
                 echo "<div class='$cssClass'>$i</div>";
+
+                /*
+                MY DEBUGGING LOG:
+                Problem: Style was not being applied to cssClass div
+                Solution: I did not have spaces in fron of the css classes I was adding in the for loop so the end class being added didn't exist in the style code. Example: it would end up being "day-boxcosmic-both". Added appropriate spaces and tested again.
+                */
             ?>
         </div>
     </div>
