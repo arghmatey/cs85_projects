@@ -34,7 +34,7 @@
                 $details .= "<li>Size (XL) Upcharge: <span>+$2.50</span></li>";
             }
 
-            if ($color === 'Sunset Orange' || color === 'Ocean Blue') {
+            if ($color === 'Sunset Orange' || $color === 'Ocean Blue') {
                 $finalPrice = $finalPrice + 2.00;
                 $details .= "<li>Premium Color Upcharge: <span>+$2.00</span></li>";
             }
@@ -57,6 +57,12 @@
             // --- DO NOT EDIT BELOW THIS LINE ---
             echo "<ul>" . $details . "</ul>";
             echo "<ul><li><span class='total'>Final Price:</span> <span class='total'>$" . number_format($finalPrice, 2) . "</span></li></ul>";
+
+            /*
+            MY DEBUGGING LOG:
+            Problem: The prmium color upcharge wasn't being abpplice when I tested with "Ocean Blue".
+            Solution: I had originally entered "ocean blue" in the $color variable for testing, but my logic was checking for "Ocean Blue". Becuase string comparisons are case sensitice, the test failed. To fix it, I matched the test variables to the exact case. It was a good lesson to not move too quickly and double check hardcoded values. 
+            */
 
         ?>
     </div>
