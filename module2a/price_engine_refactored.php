@@ -26,32 +26,10 @@
             $finalPrice = 22.50;
             $details = "<li>Base Price: <span>$" . number_format($finalPrice, 2) . "</span></li>";
 
-            // Your nested if-statement logic goes here...
-            // Example of a rule:
-            // if ($size == 'L') {
-            //     $finalPrice = $finalPrice + 1.75;
-            //     $details .= "<li>Size (L) Upcharge: <span>+$1.75</span></li>";
-            // }
-
-            // --- RULES ---
-            // The base price for every T-shirt is $22.50.
-            // Size Upcharges:
-            //      Size L adds $1.75.
-            //      Size XL adds $2.50.
-            // Premium Color Upcharge:
-            //      The colors "Sunset Orange" and "Ocean Blue" are premium and add $2.00.
-            // Customization Rules:
-            //      Adding a custom text adds a $5.00 fee.
-            //      However, if the shirt being customized is also size XL, there is an additional $3.00 handling fee (because it requires a larger printing stencil).
-            // Personalized Discount:
-            //      To make this unique to you, if your first name contains more than 6 letters, the customer gets a $1.00 "Long Name" discount.
-
             if ($size === 'L') {
                 $finalPrice = $finalPrice + 1.75;
                 $details .= "<li>Size (L) Upcharge: <span>+$1.75</span></li>";
-            }
-
-            if ($size === 'XL') {
+            } elseif ($size === 'XL') {
                 $finalPrice = $finalPrice + 2.50;
                 $details .= "<li>Size (XL) Upcharge: <span>+$2.50</span></li>";
             }
