@@ -28,10 +28,10 @@
     // Validates email input
     function validateEmail($data, $fieldName) {
         global $errorCount;
-                if (empty($data)) {
-            echo "\"$fieldName\" is a required field.<br /> \n";
-            ++$errorCount;
-            $retval = "";
+            if (empty($data)) {
+                echo "\"$fieldName\" is a required field.<br /> \n";
+                ++$errorCount;
+                $retval = "";
         }
         else {
             // Sanitize and validate email format
@@ -39,6 +39,7 @@
 
             if (!filter_var($retval, FILTER_VALIDATE_EMAIL)) {
                 echo "\"$fieldName\" is not a valid e-mail address.<br />\n";
+                ++$errorCount;
             }
         }
 
@@ -104,6 +105,24 @@
         else
             echo "<p>There was an error sending your message, " . $Sender . ".</p>\n";
     }
+
+    /* ----- REFLECTION ----- */
+    // What does each function do? 
+    //  - validateInput(): If user has entered input, trims whitespace and removes slashes. Increments error count if a field is missing.
+    //  - validateEmail(): Removes all illegal characters from email address and validates it is proper email format. Incrememnts error count if email is not properly formatted.
+    //  - displayForm(): Renders form HTML 
+    
+    // How is the user input protected? 
+    //  Being a basic form, there is no security in place, but the user input is trimmed and checked for certain characters. This could protect the user from hidden harmful or escape characters. 
+
+    // What where the most confusing parts?
+    //  There was an errorCount incrememnt missing in the validateEmail() function. This caused an unexpected error.
+
+    // What could be improved? 
+    //  Style-wise I would make the message input a textbox instead to allow for bigger messages. The message could also be validated itself, to check for code or malicious text for higher security.
+
+    // Why send a copy of the form to the sender? 
+    // Sending a copy to the sender is perfect to give a user confirmation that their message was sent. It's good for tracking and to remember the details of the original message. 
     ?>
 </body>
 </html>
