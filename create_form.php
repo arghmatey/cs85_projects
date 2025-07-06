@@ -49,24 +49,24 @@
         return htmlspecialchars($retval);
     }
 
-    function displayForm(){
+    function displayForm($FullName, $Email, $Topic, $Message){
         ?>
             <form method="POST" action="">
                 <p>
                     <label for="fullName">Full Name:</label><br />
-                    <input type="text" name="fullName" id="fullName" required>
+                    <input type="text" name="fullName" id="fullName" <?php echo $FullName; ?>/>
                 </p>
                 <p>
-                    <label for="email">Email Adress:</label><br />
-                    <input type="email" name="email" id="email" required>
+                    <label for="email">Email Address:</label><br />
+                    <input type="email" name="email" id="email" <?php echo $Email; ?>/>
                 </p>
                 <p>
                     <label for="topic">Topic:</label><br />
-                    <input type="text" name="topic" id="topic" required>
+                    <input type="text" name="topic" id="topic" <?php echo $Topic; ?>/>
                 </p>
                 <p>
                     <label for="message">Message:</label><br />
-                    <textarea name="message" id="message" rows="4" required></textarea>
+                    <textarea name="message" id="message" rows="4"><?php echo $Message; ?></textarea>
                 </p>
                 <input type="submit" value="Send Message" />
             </form>
@@ -74,10 +74,10 @@
     }
 
     $ShowForm = TRUE;
-    $fullName = "";
-    $email = "";
-    $topic = "";
-    $message = "";
+    $FullName = "";
+    $Email = "";
+    $Topic = "";
+    $Message = "";
     $errorCount = 0;
 
     function displayConfirmation($fullName, $email, $topic) {
@@ -101,9 +101,21 @@
     if ($ShowForm) {
         if ($errorCount > 0) 
             echo "<p>Please re-enter the form information below.</p>\n";
-        displayForm();
+        displayForm($FullName, $Email, $Topic, $Message);
     }
-    ?>
 
+    /* 
+    Output Predictions: 
+        - Confirmation / thank you message if all inputs pass validation
+        - Error message with form still displayed if validation fails
+
+    Expected $_POST:
+        - Object with keys: fullName, email, topic, message
+    
+    Relfections: 
+        - There are a few parts in the validation that seemed to get crowded. I decided to try making it as DRY as possible.
+        - I originally did not have the user data persist on error which was inconvenient on testing (which pointed out how it would also be inconvenient for users)
+    */
+    ?>
 </body>
 </html>
