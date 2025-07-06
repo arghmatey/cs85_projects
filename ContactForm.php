@@ -58,10 +58,51 @@
             <p>Message:
                 <input type="text" name="Message" value="<?php echo $Message; ?>" /></p>
             <p>
-                <input type="reset" value="Clear Form" />&nbsp; $nbsp;
+                <input type="reset" value="Clear Form" />&nbsp; &nbsp;
                 <input type="submit" name="Submit" value="Send Form" /></p>
         </form>
         <?php
+    }
+
+    /* ----- Main Logic ----- */
+
+    $ShowForm= TRUE;
+    $errorCount = 0;
+    $Sender = "";
+    $Email = "";
+    $Subject = "";
+    $Message = "";
+
+    // Validates input on form submit
+    if (isset($_POST['Submit'])) {
+        $Sender = validateInput($_POST['Sender'], "Your Name");
+        $Email =  validateEmail($_POST['Email'], "Your E-mail");
+        $Subject =  validateInput($_POST['Subject'], "Subject");
+        $Message =  validateInput($_POST['Message'], "Message");
+
+        if ($errorCount==0)
+            $ShowForm = FALSE;
+        else
+            $ShowForm = TRUE;
+    }
+
+    // Display form if: errors, first render
+    if ($ShowForm == TRUE) {
+        if ($errorCount>0) 
+            echo "<p>Please re-enter the form information below.</p>\n";
+        displayForm($Sender, $Email, $Subject, $Message);
+    }
+    else {
+        // Build email if all inputs are valid
+        $SenderAddress = "$Sender <$Email>";
+        $Headers = "From: $SenderAddress\nCC: $SenderAddress\n";
+
+        $result = mail("recipient@example.com", $Subject, $Message, $Headers);
+
+        if ($result)
+            echo "<p>Your message has been sent. Thank you, " . $Sender . ".</p>\n";
+        else
+            echo "<p>There was an error sending your message, " . $Sender . ".</p>\n";
     }
     ?>
 </body>
