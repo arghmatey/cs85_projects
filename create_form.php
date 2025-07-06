@@ -1,3 +1,4 @@
+<!-- SARAH HAMILTON -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,47 @@
 </head>
 <body>
     <?php
+
+    function validateInput ($data, $fieldName, $minWords = 1, $maxWords = null) {
+        global $errorCount;
+        if (empty($data)) {
+            echo "\"$fieldName\" is a required field.<br /> \n";
+            ++$errorCount;
+            $retval = "";
+        } else if (!is_null($maxWords) && str_word_count($data) >= $maxWords) { 
+            echo "\"$fieldName\" must not exceed $maxWords words.<br /> \n";
+            ++$errorCount;
+            $retval = "";
+        } else if ($minWords > 1 && str_word_count($data) <= $minWords) { 
+            echo "\"$fieldName\" must be at least $minWords words.<br /> \n";
+            ++$errorCount;
+            $retval = "";
+        } else {
+            $retval =  htmlspecialchars(trim(stripslashes($data)));
+        }
+
+        return($retval);
+    }
+
+    function validateEmail($data, $fieldName) {
+        global $errorCount;
+            if (empty($data)) {
+                echo "\"$fieldName\" is a required field.<br /> \n";
+                ++$errorCount;
+                $retval = "";
+        }
+        else {
+            $retval = filter_var($data, FILTER_SANITIZE_EMAIL);
+
+            if (!filter_var($retval, FILTER_VALIDATE_EMAIL)) {
+                echo "\"$fieldName\" is not a valid e-mail address.<br />\n";
+                ++$errorCount;
+            }
+        }
+
+        return htmlspecialchars($retval);
+    }
+
     function displayForm(){
         ?>
             <form method="POST" action="">
@@ -31,6 +73,7 @@
         <?php
     }
 
+    $ShowForm = TRUE;
     $fullName = "";
     $email = "";
     $topic = "";
@@ -42,17 +85,22 @@
         echo "<p>We'll get back to you at $email.</p>"; 
     }
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $fullName = htmlspecialchars($_POST['fullName']);
-        $email = htmlspecialchars($_POST['email']);
-        $topic = htmlspecialchars($_POST['topic']);
-        $message = htmlspecialchars($_POST['message']);
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $fullName = validateInput($_POST['fullName'], "Full Name");
+        $email = validateEmail($_POST['email'], "Email Address");
+        $topic = validateInput($_POST['topic'], "Topic");
+        $message = validateInput($_POST['message'], "Message", 50, 150);
 
-        // Temporary raw results
-        displayConfirmation($fullName, $email, $topic);
+        if ($errorCount == 0) {
+            $ShowForm = FALSE;
+            displayConfirmation($fullName, $email, $topic);
+        } else
+            $ShowForm = TRUE;
     }
 
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $errorCount > 0) {
+    if ($ShowForm) {
+        if ($errorCount > 0) 
+            echo "<p>Please re-enter the form information below.</p>\n";
         displayForm();
     }
     ?>
