@@ -43,6 +43,9 @@
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
+
+    // ----- REFLECTION -----
+    // I selected these specific items because I use them the most or are planning on using them soon. In real applications, a small program like this would be scaled to control inventory for warehouses, user accounts, or retail stock. Using PDO, input data and queries are seperated. This ensures input data is seem as values only, not executable code. To include something I learned in the preivous assignment, I added htmlspecialchars to prevent XSS when rendering into the table. 
     ?>
 </body>
 </html>
