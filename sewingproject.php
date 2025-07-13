@@ -22,6 +22,24 @@
                 $this->hasPattern = $hasPattern;
                 $this->completed = $completed;
             }
+
+            // Returns string summarizing project
+            // Example output: "Project: Spring Coat using Wool fabric. Time invested: 8 hours."
+            public function displaySummary() {
+                return "Project: $this->name using $this->fabric. Time invested: $this->hoursSpent hours.";
+            }
+
+            // If project has a pattern, add 2 hours for cutting and ironing
+            // If project has no pattern, add 4 hours for drafting, cutting and ironing
+            // Example output: 5
+            public function estimatedTotalTime() {
+                return $this->hasPattern ? $this->hoursSpent + 2 : $this->hoursSpent + 4;
+            }
+
+            // Changes completed to true
+            public function markAsCompleted() {
+                $this->completed = true;
+            }
         }
     ?>
 </body>
