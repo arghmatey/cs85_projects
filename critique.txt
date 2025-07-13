@@ -1,0 +1,2 @@
+AI promtpt critique: The method used the correct property and is functional. I was able to add it without changing anything. It
+would need changed manually if the thresholds were to ever change.
