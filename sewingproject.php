@@ -46,6 +46,22 @@
             public function needsPattern() {
                 return $this->hasPattern ?  "Pattern being used." : "Consider referencing a pattern for faster results.";
             }
+
+            // AI-GENERATED METHOD
+            // Prompt: Write a PHP method for a class named SewingProject that returns a message based on how many hours the project
+            // took. The class has a property named $hoursSpent. The method should accept the time spent on a project and return 
+            // one of three strings depending on the value of $hoursSpent.
+            // Critique: The method using the correct property and is functional. I was able to add it without changing anything. It
+            // would need changed manually if the thresholds were to ever change.
+            public function getEffortLevel() {
+                if ($this->hoursSpent < 2) {
+                    return "Quick project!";
+                } elseif ($this->hoursSpent <= 5) {
+                    return "Moderate effort.";
+                } else {
+                    return "Major time investment!";
+                }
+            }
         }
 
         // Instantiate and output results
@@ -56,12 +72,15 @@
         echo $tote->displaySummary() . "<br>";          // Project: Tote Bag using Canvas. Time invested: 1 hours. 
         echo "Estimated Total Time: " . $tote->estimatedTotalTime() . " hrs<br>"; // Estimated Total Time: 5 hrs
         echo $tote->needsPattern() . "<br>";            // Consider referencing a pattern for faster results.
+        echo $tote->getEffortLevel() . "<br>";          // "Quick project!"
         $tote->markAsCompleted();
         echo "Completed? " . ($tote->completed ? "Yes" : "No") . "<br><br>";  // Completed? Yes
 
-        echo $skirt->displaySummary() . "<br><br>";         // Project: Wrap Skirt using Rayon. Time invested: 3 hours.
+        echo $skirt->displaySummary() . "<br>";         // Project: Wrap Skirt using Rayon. Time invested: 3 hours.
+        echo $skirt->getEffortLevel() . "<br><br>";     // Moderate Effort.
         
-        echo $coat->displaySummary() . "<br>";              // Project: Spring Coat using Wool. Time invested: 8 hours.
+        echo $coat->displaySummary() . "<br>";          // Project: Spring Coat using Wool. Time invested: 8 hours.
+        echo $coat->getEffortLevel() . "<br><br>";      // Major time investment!
     ?>
 </body>
 </html>
