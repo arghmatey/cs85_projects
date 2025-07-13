@@ -40,7 +40,28 @@
             public function markAsCompleted() {
                 $this->completed = true;
             }
+
+            // If project has a pattern, return string confirming
+            // If project has no pattern, return string suggesting using one
+            public function needsPattern() {
+                return $this->hasPattern ?  "Pattern being used." : "Consider referencing a pattern for faster results.";
+            }
         }
+
+        // Instantiate and output results
+        $tote = new SewingProject("Tote Bag", "Canvas", 1, false, false);
+        $skirt = new SewingProject("Wrap Skirt", "Rayon", 3, true, false);
+        $coat = new SewingProject("Spring Coat", "Wool", 8, true, true);
+
+        echo $tote->displaySummary() . "<br>";          // Project: Tote Bag using Canvas. Time invested: 1 hours. 
+        echo "Estimated Total Time: " . $tote->estimatedTotalTime() . " hrs<br>"; // Estimated Total Time: 5 hrs
+        echo $tote->needsPattern() . "<br>";            // Consider referencing a pattern for faster results.
+        $tote->markAsCompleted();
+        echo "Completed? " . ($tote->completed ? "Yes" : "No") . "<br><br>";  // Completed? Yes
+
+        echo $skirt->displaySummary() . "<br><br>";         // Project: Wrap Skirt using Rayon. Time invested: 3 hours.
+        
+        echo $coat->displaySummary() . "<br>";              // Project: Spring Coat using Wool. Time invested: 8 hours.
     ?>
 </body>
 </html>
