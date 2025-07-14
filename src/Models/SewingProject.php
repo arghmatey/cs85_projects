@@ -3,17 +3,17 @@ namespace App\Models;
 
 class SewingProject {
     public $name;
-    public $hoursSpent;
     public $fabric;
-    public $status;
+    public $hoursSpent;
     public $hasPattern;
+    public $status;
 
-    public function __construct($name, $hoursSpent, $fabric, $status, $hasPattern) {
+    public function __construct($name, $fabric, $hoursSpent, $hasPattern, $status) {
         $this->name = $name;
-        $this->hoursSpent = $hoursSpent;
         $this->fabric = $fabric;
-        $this->status = $status;
+        $this->hoursSpent = $hoursSpent;
         $this->hasPattern = $hasPattern;
+        $this->status = $status;
     }
 
     public function getSummary() {
