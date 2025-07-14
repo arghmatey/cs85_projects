@@ -7,6 +7,6 @@ class ProjectController {
     public function show() {
         $project = new SewingProject("Wrap Skirt", "Rayon", 3, true, "complete");
 
-        include __DIR__ . '/../../views/porjectview.php';
+        include __DIR__ . '/../../views/projectview.php';
     }
 }

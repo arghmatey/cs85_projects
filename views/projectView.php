@@ -9,7 +9,6 @@
     <h1>Sewing Projects</h1>
 
     <?php 
-        echo "<h1>Sewing Project Tracker</h1>";
         echo "<p>" . $project->getSummary() . "</p>";
     ?>
 </body>
