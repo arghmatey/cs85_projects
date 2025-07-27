@@ -37,9 +37,9 @@ class ContactController extends Controller
         ]);
 
         // If validation passes, create new contact
-        $contact = Contact::create($validateData);
+        $contact = Contact::create($validatedData);
 
-        // Redirect to contact detail page with a success message
+        // Redirect to contact index page with a success message
         return redirect()->route('contacts.index')
             ->with('success', 'Contact created successfully!');
     }
@@ -61,7 +61,7 @@ class ContactController extends Controller
         $contact = Contact::findOrFail($id);
 
         // Pass the contact data to the view so the form loads pre-populated
-        return view('contacts.edit', compact('post'));
+        return view('contacts.edit', compact('contact'));
     }
 
     /**
@@ -82,7 +82,7 @@ class ContactController extends Controller
         // Update the contact
         $contact->update($validatedData);
 
-        // Redirect to contact detail page with a success message
+        // Redirect to contact index page with a success message
         return redirect()->route('contacts.index')
             ->with('success', 'Contact updated successfully!');
     }
@@ -90,8 +90,12 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+
+        // Redirect to contact detail page with a success message
+        return redirect()->route('contacts.index')
+            ->with('success', 'Contact deleted successfully!');
     }
 }
