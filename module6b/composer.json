@@ -1,0 +1,17 @@
+{
+  "name": "sarahwilliams/cs85-module6b-mvcapp",
+  "description": "A simple app to track sewing projects",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Sarah",
+      "email": "40401149+arghmatey@users.noreply.github.com"
+    }
+  ],
+  "require": {}
+}
